@@ -35,6 +35,7 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
         form.setFieldValue("requiJob", dataJC?.job?.jobRequire)
         form.setFieldValue("bene", dataJC?.job?.benefit)
         form.setFieldValue("limitApp", dataJC?.job?.limitPeopleForJob)
+        form.setFieldValue("typeJob", dataJC?.job?.typeJob)
         form.setFieldValue("nameCom", dataJC?.company?.name)
         form.setFieldValue("addressCom", dataJC?.company?.address)
         form.setFieldValue("leader", dataJC?.company?.leader)
@@ -112,6 +113,13 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="Số lượng tuyển"
                         name="limitApp"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                    >
+                        <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
+                    </Form.Item>
+                    <Form.Item
+                        label="Hình thức làm việc"
+                        name="typeJob"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />

@@ -59,8 +59,7 @@ const TableShowAllJob: React.FC<Iprops> = ({ allJobCom, showModal }) => {
 
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ height: '600px', width: '300px', backgroundColor: 'red' }}></div>
+        <div>
 
             <div style={{ width: '1200px' }}>
                 <Table

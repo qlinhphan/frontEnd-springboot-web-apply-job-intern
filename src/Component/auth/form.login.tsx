@@ -65,6 +65,7 @@ const FormLogin: React.FC = () => {
             })
 
             console.log("check role: ", rs.data.data.role)
+            console.log("check login: ", rs.data.data)
 
             if (rs.data.data.role == "admin") {
                 navigate("/admin")

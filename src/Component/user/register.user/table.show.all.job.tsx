@@ -47,11 +47,12 @@ const TableShowAllJob: React.FC<Iprops> = ({ allJobCom, showModal }) => {
             dataIndex: ['company', 'address'],
         },
         {
+            // {record.id}
             title: 'Action',
             key: 'action',
             render: (_: any, record: any) => (
                 <Space size="middle">
-                    <a style={{ textDecoration: 'underline' }} onClick={() => { showModal(record.id) }}>Xem chi tiết {record.id}</a>
+                    <a style={{ textDecoration: 'underline' }} onClick={() => { showModal(record.id) }}>Xem chi tiết công việc</a>
                 </Space>
             ),
         },

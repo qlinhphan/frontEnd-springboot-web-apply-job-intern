@@ -2,7 +2,6 @@
 import { INCREMENT, DECREMENT } from '../action/counterAction.ts';
 const INITIAL_STATE = {
     info: {
-        id: "",
         email: "",
         name: "",
         accessToken: "",
@@ -14,10 +13,10 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action: any) => {
     switch (action.type) {
         case "USER_LOGIN_SUCCESS":
+            console.log("in redux: ", action.payload)
             return {
                 ...state,
                 info: {
-                    id: action.payload.id,
                     email: action.payload.email,
                     name: action.payload.name,
                     accessToken: action.payload.accessToken,

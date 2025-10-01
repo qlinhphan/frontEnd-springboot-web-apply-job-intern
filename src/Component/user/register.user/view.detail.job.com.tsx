@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Form, Input, Modal, Switch } from 'antd';
+import { Alert, Button, Form, Input, Modal, notification, Switch } from 'antd';
+import { findByIdJC } from '@/apiService/manager.create.job.comp';
+import { useSelector } from 'react-redux';
+import { findUserByEmailToken } from '@/apiService/user.api';
+import { userRegisterJobForThem } from '@/apiService/user.page.api';
 
 interface Iprops {
     isModalOpen: any
@@ -9,6 +13,9 @@ interface Iprops {
 const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJC }) => {
 
     const [form] = Form.useForm()
+
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
+    const emailUser = useSelector((state: any) => state.user.info.email)
 
 
     const handleOk = () => {
@@ -20,8 +27,26 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
         setIsModalOpen(false);
     };
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        // console.log('Success:', values);
+        const rs = await findByIdJC(values.idJC, accessToken)
+        // console.log("sumOK: ", rs.data.data)
+        console.log("idJob: ", rs.data.data.job.id)
+        // console.log("emailUser: ", emailUser)
+
+        try {
+            const result = await userRegisterJobForThem(rs.data.data.job.id, accessToken);
+            notification.success({
+                message: "Đăng ký thành công",
+                description: "Bạn đã đăng ký job thành công"
+            })
+        } catch (error: any) {
+            notification.error({
+                message: "Thất bại",
+                description: error?.response?.data?.message
+            })
+        }
+
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -36,12 +61,15 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
         form.setFieldValue("bene", dataJC?.job?.benefit)
         form.setFieldValue("limitApp", dataJC?.job?.limitPeopleForJob)
         form.setFieldValue("typeJob", dataJC?.job?.typeJob)
+        form.setFieldValue("salary", dataJC?.job?.salary)
         form.setFieldValue("nameCom", dataJC?.company?.name)
         form.setFieldValue("addressCom", dataJC?.company?.address)
         form.setFieldValue("leader", dataJC?.company?.leader)
         form.setFieldValue("size", dataJC?.company?.size)
         form.setFieldValue('emailAddressCom', dataJC?.company?.addressEmail)
         form.setFieldValue("idJC", dataJC?.id)
+
+        // console.log("dât: ", dataJC)
     }, [dataJC])
 
     return (
@@ -69,6 +97,7 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     autoComplete="off"
                     layout="vertical"
                     form={form}
+
                 >
                     <Form.Item
                         label="ID JC"
@@ -120,6 +149,13 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="Hình thức làm việc"
                         name="typeJob"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                    >
+                        <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
+                    </Form.Item>
+                    <Form.Item
+                        label="Tiền lương - Tính bằng $"
+                        name="salary"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />

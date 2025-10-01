@@ -20,4 +20,16 @@ const searchConditionJobForUser = async (money: string, typeJob: string, nameJob
     return rs
 }
 
-export { findAllForUser, searchConditionJobForUser }
+const userRegisterJobForThem = async (idJob: string, accessToken: string) => {
+    const data = new FormData()
+    data.append("idJob", idJob);
+    const rs = await axios.post(`http://localhost:8017/user-register-job`, data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+
+    return rs
+}
+
+export { findAllForUser, searchConditionJobForUser, userRegisterJobForThem }

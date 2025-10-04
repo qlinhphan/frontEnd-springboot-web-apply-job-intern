@@ -11,7 +11,7 @@ const items = [
     {
         key: '1',
         label: (
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            <a rel="noopener noreferrer" href="update-profile">
                 Bảo mật & Tài khoản
             </a>
         ),
@@ -59,7 +59,6 @@ const HeaderUser: React.FC = () => (
         tags={<Tag color="blue">Running</Tag>}
         extra={[
             <Button key="3"><Link to={'/'}>Tìm công việc</Link></Button>,
-            <Button key="2"><Link to={'/update-profile'}>Cập nhật profile</Link></Button>,
             <Button key="1" type="primary">
                 <Link to={'/view-list-registerd'}>Xem danh sách đăng ký</Link>
             </Button>,

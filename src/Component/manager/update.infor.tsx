@@ -65,8 +65,10 @@ const UpdateInforManager: React.FC = () => {
     const description = 'This is a description.';
 
     const fetchUserByEmail = async () => {
+        console.log(email)
+        console.log(accToken)
         const rs = await findUserByEmailToken(email, accToken)
-        console.log(rs.data.data)
+        console.log("DT: ", rs.data.data)
         form.setFieldValue("address", rs.data.data.address)
         form.setFieldValue("email", rs.data.data.email)
         form.setFieldValue("names", rs.data.data.name)

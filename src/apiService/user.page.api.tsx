@@ -32,4 +32,24 @@ const userRegisterJobForThem = async (idJob: string, accessToken: string) => {
     return rs
 }
 
-export { findAllForUser, searchConditionJobForUser, userRegisterJobForThem }
+const userViewUserJobTheir = async (current: number, limit: number, accessToken: string) => {
+    const rs = await axios.get(`http://localhost:8017/user-view-list-registered?current=${current}&limit=${limit}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+
+    return rs
+}
+
+const deleteUserJobForUser = async (id: number, accessToken: string) => {
+    const rs = await axios.delete(`http://localhost:8017/del-user-job-by-id/${id}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+
+    return rs
+}
+
+export { findAllForUser, searchConditionJobForUser, userRegisterJobForThem, userViewUserJobTheir, deleteUserJobForUser }

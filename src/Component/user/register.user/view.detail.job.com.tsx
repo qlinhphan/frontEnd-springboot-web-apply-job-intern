@@ -102,7 +102,7 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="ID JC"
                         name="idJC"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                         style={{ display: 'none' }}
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 5px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
@@ -111,14 +111,14 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="Tên Công việc"
                         name="nameJob"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 5px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Mô tả công việc"
                         name="desc"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
@@ -128,35 +128,35 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="Yêu cầu công việc"
                         name="requiJob"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Lợi ích"
                         name="bene"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Số lượng tuyển"
                         name="limitApp"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Hình thức làm việc"
                         name="typeJob"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Tiền lương - Tính bằng $"
                         name="salary"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
@@ -164,35 +164,34 @@ const ViewDetailJobCom: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataJ
                     <Form.Item
                         label="Tên công ty"
                         name="nameCom"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 5px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ công ty"
                         name="addressCom"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Leader công ty"
                         name="leader"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Quy mô công ty"
                         name="size"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ email của cty - mọi thắc mắc bạn có thể phản hồi tại đây cho chúng tôi"
                         name="emailAddressCom"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
                         style={{ width: '950px' }}
                     >
                         <Input style={{ width: '950px', boxShadow: '5px 5px 9px pink', border: 'none', backgroundColor: 'white', color: 'black' }} disabled />

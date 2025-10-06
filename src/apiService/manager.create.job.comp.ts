@@ -47,4 +47,14 @@ const deleteJCByJob = async (idJob: number, accessToken: string) => {
     return rs
 }
 
-export { createJobCom, findAllHasPageJC, findByIdJC, deleteJCByJob }
+const managerViewWhoApplied = async (accessToken: string) => {
+    const rs = await axios.get('http://localhost:8017/manager-view-who-applied', {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+
+    return rs
+}
+
+export { createJobCom, findAllHasPageJC, findByIdJC, deleteJCByJob, managerViewWhoApplied }

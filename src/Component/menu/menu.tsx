@@ -12,6 +12,8 @@ import type { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
 import { Link } from "react-router-dom";
 import ViewRoleAdmin from './view.role.admin';
+import ViewRoleUser from './view.role.user';
+import ViewRoleMana from './view.role.manager';
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -20,9 +22,17 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const Menus: React.FC = () => {
     const [isModalOpenAdmin, setIsModalOpenAdmin] = useState(false);
+    const [isModalOpenUser, setIsModalOpenUser] = useState(false);
+    const [isModalOpenMana, setIsModalOpenMana] = useState(false);
 
     const showModalAdmin = () => {
         setIsModalOpenAdmin(true);
+    };
+    const showModalUser = () => {
+        setIsModalOpenUser(true);
+    };
+    const showModalMana = () => {
+        setIsModalOpenMana(true);
     };
     const items: MenuItem[] = [
         { key: '0', label: <Link to={'/admin'}>QLinh App</Link> },
@@ -49,8 +59,8 @@ const Menus: React.FC = () => {
                 {
                     key: '9', label: <div onClick={() => { showModalAdmin() }}>Admin</div>
                 },
-                { key: '10', label: <div>Manager</div> },
-                { key: '11', label: <div>User</div> },
+                { key: '10', label: <div onClick={() => { showModalMana() }}>Manager</div> },
+                { key: '11', label: <div onClick={() => { showModalUser() }}>User</div> },
             ],
         },
     ];
@@ -76,6 +86,12 @@ const Menus: React.FC = () => {
             />
             <div>
                 <ViewRoleAdmin isModalOpenAdmin={isModalOpenAdmin} setIsModalOpenAdmin={setIsModalOpenAdmin}></ViewRoleAdmin>
+            </div>
+            <div>
+                <ViewRoleUser isModalOpenUser={isModalOpenUser} setIsModalOpenUser={setIsModalOpenUser}></ViewRoleUser>
+            </div>
+            <div>
+                <ViewRoleMana isModalOpenMana={isModalOpenMana} setIsModalOpenMana={setIsModalOpenMana}></ViewRoleMana>
             </div>
         </div>
     );

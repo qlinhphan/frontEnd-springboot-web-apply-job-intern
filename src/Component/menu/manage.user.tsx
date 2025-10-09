@@ -6,6 +6,7 @@ import ModalCreateUser from "./modal.create.user";
 import ModalUpdateUser from "./modal.update.user";
 import { findUserById } from "@/apiService/user.api";
 import ModalDeleteUser from "./modal.delete.user";
+import { useSelector } from "react-redux";
 
 const ManageUser = () => {
 
@@ -13,6 +14,7 @@ const ManageUser = () => {
     const [sumObj, setSumObj] = useState()
     const [pages, setPages] = useState()
     const [current, setCurrent] = useState()
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
 
     const [userUpdate, setUserUpdate] = useState({})  // nguoi dung muon sua
     const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
@@ -21,7 +23,7 @@ const ManageUser = () => {
         // alert(id)
 
         try {
-            const rs = await findUserById(id)
+            const rs = await findUserById(id, accessToken)
             // console.log(rs.data.data)
             setUserUpdate(rs.data.data)
         } catch (error: any) {
@@ -35,7 +37,7 @@ const ManageUser = () => {
     const showModal = async (id: string) => {
         setIsModalOpen(true);
         try {
-            const rs = await findUserById(id)
+            const rs = await findUserById(id, accessToken)
             // console.log(rs.data.data)
             setUserToDel(rs.data.data)
         } catch (error: any) {
@@ -47,7 +49,11 @@ const ManageUser = () => {
 
     const fetchAllUsersFirst = async () => {
         try {
-            const response = await axios.get(`http://localhost:8017/user/haspage?current=${1}&limit=${5}`);
+            const response = await axios.get(`http://localhost:8017/user/haspage?current=${1}&limit=${5}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
             setAllUsers(response.data.data.data)
             setSumObj(response.data.data.sumObj)
             setPages(response.data.data.pages)
@@ -64,7 +70,11 @@ const ManageUser = () => {
 
     const ChangePage = async (pageNumber: number) => {
         try {
-            const response = await axios.get(`http://localhost:8017/user/haspage?current=${pageNumber}&limit=${5}`);
+            const response = await axios.get(`http://localhost:8017/user/haspage?current=${pageNumber}&limit=${5}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
             setAllUsers(response.data.data.data)
             setSumObj(response.data.data.sumObj)
             setPages(response.data.data.pages)

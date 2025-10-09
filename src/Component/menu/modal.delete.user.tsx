@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, notification } from 'antd';
 import { deleteAUser } from '@/apiService/user.api';
+import { useSelector } from 'react-redux';
 
 
 interface Iprops {
@@ -13,13 +14,14 @@ const ModalDeleteUser: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, userTo
 
     const [idUser, setIdUser] = useState("")
     const [email, setEmail] = useState()
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
 
 
     const handleOk = async () => {
 
         // alert(idUser)
         try {
-            const rs = await deleteAUser(idUser)
+            const rs = await deleteAUser(idUser, accessToken)
             notification.success({
                 message: "Thao tác hoàn tất",
                 description: "Xóa người dùng thành công"

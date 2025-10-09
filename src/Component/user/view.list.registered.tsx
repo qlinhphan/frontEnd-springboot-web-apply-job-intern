@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const ViewListRegistered = () => {
     const accessToken = useSelector((state: any) => state.user.info.accessToken)
-    const actionDel = async (idUserJob: number) => {
+    const actionDel = async (idUserJob: number, allowDel: any) => {
         try {
             const rs = await deleteUserJobForUser(idUserJob, accessToken)
             fetchAllForThem()
@@ -22,6 +22,12 @@ const ViewListRegistered = () => {
 
     }
     const columns = [
+        {
+            title: 'Mã công việc',
+            dataIndex: ['job', 'id'],
+            key: 'idJob',
+            render: (text: any) => <a>{text}</a>,
+        },
         {
             title: 'Tên công việc',
             dataIndex: ['job', 'nameJob'],
@@ -58,9 +64,13 @@ const ViewListRegistered = () => {
             key: 'action',
             render: (_: any, record: any) => (
                 <Space size="middle">
-                    <a><Button style={{ color: 'red', backgroundColor: 'white', border: 'none' }}
-                        onClick={() => { actionDel(record.id) }}
-                    >X</Button></a>
+                    <a>
+                        {record.allowDel == true ? <Button style={{ color: 'red', backgroundColor: 'white', border: 'none' }}
+                            onClick={() => { actionDel(record.id, record.allowDel) }}
+                        >X</Button> : <Button style={{ color: 'green', backgroundColor: 'white', border: 'none' }}
+                            onClick={() => { actionDel(record.id, record.allowDel) }} disabled
+                        >Được tuyển</Button>}
+                    </a>
                 </Space>
             ),
         },
@@ -72,7 +82,7 @@ const ViewListRegistered = () => {
     const [total, setTotal] = useState()
     const fetchAllForThem = async () => {
         const rs = await userViewUserJobTheir(1, 5, accessToken)
-        console.log(rs.data.data)
+        console.log("DT: ", rs.data.data.data)
         setAllUserJob(rs.data.data.data)
         setCurrent(rs.data.data.current)
         setPageSize(rs.data.data.limit)

@@ -57,4 +57,17 @@ const managerViewWhoApplied = async (accessToken: string) => {
     return rs
 }
 
-export { createJobCom, findAllHasPageJC, findByIdJC, deleteJCByJob, managerViewWhoApplied }
+const managerOkAppliedForYou = async (email: string, idJob: string, accessToken: string) => {
+    const data = new FormData()
+    data.append("emailOfUserAppied", email)
+    data.append("idJob", idJob)
+    const rs = await axios.post('http://localhost:8017/ok-applied-success', data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+
+    return rs
+}
+
+export { createJobCom, findAllHasPageJC, findByIdJC, deleteJCByJob, managerViewWhoApplied, managerOkAppliedForYou }

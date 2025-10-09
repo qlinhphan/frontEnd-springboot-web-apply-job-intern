@@ -5,6 +5,7 @@ import { Pagination } from "antd"
 import ModalCreateJob from "./modal.create.job"
 import ModalUpdateJob from "./modal.update.job"
 import ModalDeleteJob from "./modal.delete.job"
+import { useSelector } from "react-redux"
 
 const ManagerJob = () => {
 
@@ -12,8 +13,9 @@ const ManagerJob = () => {
     const [total, setTotal] = useState("")
     const [limit, setlimit] = useState("")
     const [current, setCurrent] = useState("")
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
     const fetchAllJobs = async () => {
-        const rs = await findAllJobHasPage("1", "5")
+        const rs = await findAllJobHasPage("1", "5", accessToken)
         setAllJobs(rs.data.data.data)
         setTotal(rs.data.data.sumObj)
         setlimit(rs.data.data.limit)
@@ -25,7 +27,7 @@ const ManagerJob = () => {
     }, [])
 
     const changePage = async (pageNumber: number) => {
-        const rs = await findAllJobHasPage(pageNumber.toString(), "5")
+        const rs = await findAllJobHasPage(pageNumber.toString(), "5", accessToken)
         setAllJobs(rs.data.data.data)
         setTotal(rs.data.data.sumObj)
         setlimit(rs.data.data.limit)
@@ -35,7 +37,7 @@ const ManagerJob = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataToDo, setDataToDo] = useState({})
     const showModal = async (id: number) => {
-        const rs = await findJobById(id);
+        const rs = await findJobById(id, accessToken);
         setDataToDo(rs.data.data)
         setIsModalOpen(true);
     };
@@ -43,7 +45,7 @@ const ManagerJob = () => {
     const [isModalOpenDel, setIsModalOpenDel] = useState(false);
     const [dataToDoDel, setDataToDoDel] = useState({})
     const showModalDel = async (id: number) => {
-        const rs = await findJobById(id);
+        const rs = await findJobById(id, accessToken);
         setDataToDoDel(rs.data.data)
         setIsModalOpenDel(true);
     };
@@ -55,7 +57,6 @@ const ManagerJob = () => {
                 <div className="modal-create-user" style={{ marginTop: '23px' }}>
                     <ModalCreateJob fetchAllJobs={fetchAllJobs}></ModalCreateJob>
                 </div>
-
             </div>
             <div style={{ marginTop: '5%' }}>
                 <TableJob allJobs={allJobs} showModal={showModal} showModalDel={showModalDel}></TableJob>

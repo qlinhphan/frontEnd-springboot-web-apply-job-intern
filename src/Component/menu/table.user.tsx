@@ -58,7 +58,6 @@ const TableUser: React.FC<Iprops> = ({ allUsers, setAllUsers, showModalUpdate, s
     return (
         <div>
             <Table<DataType> columns={columns} dataSource={allUsers} pagination={false} />
-
         </div>
 
     )

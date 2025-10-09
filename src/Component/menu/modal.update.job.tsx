@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input, Modal, notification } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { updateJobById } from '@/apiService/job.api';
+import { useSelector } from 'react-redux';
 
 interface Iprops {
     isModalOpen: any, setIsModalOpen: any, dataToDo: any, fetchAllJobs: () => void
@@ -13,11 +14,13 @@ const ModalUpdateJob: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataToD
     const [requireJob, setRequireJob] = useState("")
     const [description, setDescription] = useState("")
     const [benefit, setBenefit] = useState("")
+    const [quality, setQuality] = useState("")
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
 
     const handleOk = async () => {
 
         try {
-            const rs = await updateJobById(+id, nameJob, description, requireJob, benefit)
+            const rs = await updateJobById(+id, nameJob, description, requireJob, benefit, +quality, accessToken)
             notification.success({
                 message: "Thao tác thành công",
                 description: "Cập nhật công ty thành công"
@@ -42,6 +45,7 @@ const ModalUpdateJob: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataToD
         setRequireJob(dataToDo.jobRequire)
         setDescription(dataToDo.description)
         setBenefit(dataToDo.benefit)
+        setQuality(dataToDo.limitPeopleForJob)
     }, [dataToDo])
 
     return (
@@ -68,6 +72,10 @@ const ModalUpdateJob: React.FC<Iprops> = ({ isModalOpen, setIsModalOpen, dataToD
                 <div style={{ display: 'flex', gap: '17px', marginBottom: '17px' }}>
                     <div style={{ width: '78px' }}>Lợi ích:</div>
                     <Input onChange={(event) => { setBenefit(event?.target.value) }} value={benefit}></Input>
+                </div>
+                <div style={{ display: 'flex', gap: '17px', marginBottom: '17px' }}>
+                    <div style={{ width: '78px' }}>Số lượng:</div>
+                    <Input onChange={(event) => { setQuality(event?.target.value) }} value={quality}></Input>
                 </div>
             </Modal>
         </>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input, Modal, notification, Select } from 'antd';
 import { updateAUser } from '@/apiService/user.api';
+import { useSelector } from 'react-redux';
 
 interface Iprops {
     isModalOpenUpdate: any,
@@ -17,13 +18,14 @@ const ModalUpdateUser: React.FC<Iprops> = ({ isModalOpenUpdate, showModalUpdate,
     const [name, setName] = useState("")
     const [address, setAddress] = useState("")
     const [roleId, setRoleId] = useState("")
+    const accessToken = useSelector((state: any) => state.user.info.accessToken)
 
 
     const handleOk = async () => {
         // console.log(idUser, email, name, address, roleId)
         try {
             // console.log(idUser, email, name, address, roleId)
-            const rs = await updateAUser(idUser, address, name, email, roleId);
+            const rs = await updateAUser(idUser, address, name, email, roleId, accessToken);
             notification.success({
                 message: "Hoàn tất",
                 description: "Cập nhật người dùng thành công"

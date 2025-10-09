@@ -1,11 +1,15 @@
 import axios from "axios"
 
-const findAllJobHasPage = async (current: string, limit: string) => {
-    const rs = await axios.get(`http://localhost:8017/jobs/haspage?current=${current}&limit=${limit}`)
+const findAllJobHasPage = async (current: string, limit: string, accessToken: string) => {
+    const rs = await axios.get(`http://localhost:8017/jobs/haspage?current=${current}&limit=${limit}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
     return rs
 }
 
-const createAJob = async (nameJob: string, description: string, jobRequire: string, benefit: string, quality: number) => {
+const createAJob = async (nameJob: string, description: string, jobRequire: string, benefit: string, quality: number, accessToken: string) => {
     const data = {
         "nameJob": nameJob,
         "description": description,
@@ -14,12 +18,20 @@ const createAJob = async (nameJob: string, description: string, jobRequire: stri
         "limitPeopleForJob": quality
     }
 
-    const rs = await axios.post('http://localhost:8017/jobs', data)
+    const rs = await axios.post('http://localhost:8017/jobs', data, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
     return rs;
 }
 
-const findJobById = async (id: number) => {
-    const rs = axios.get(`http://localhost:8017/jobs/${id}`)
+const findJobById = async (id: number, accessToken: string) => {
+    const rs = axios.get(`http://localhost:8017/jobs/${id}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
     return rs;
 }
 

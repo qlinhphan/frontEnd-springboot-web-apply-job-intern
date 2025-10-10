@@ -71,7 +71,7 @@ const Menus: React.FC = () => {
     };
 
     return (
-        <div style={{ width: 256, margin: '0px', height: '100vh' }}>
+        <div style={{ width: 256, margin: '0px', height: '100vh', backgroundColor: 'red' }}>
             {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </Button> */}
@@ -82,7 +82,7 @@ const Menus: React.FC = () => {
                 theme="dark"
                 inlineCollapsed={collapsed}
                 items={items}
-                style={{ height: '100vh' }}
+                style={{ height: '100%' }}
             />
             <div>
                 <ViewRoleAdmin isModalOpenAdmin={isModalOpenAdmin} setIsModalOpenAdmin={setIsModalOpenAdmin}></ViewRoleAdmin>
